@@ -52,9 +52,6 @@ function ly_theme_setup() {
 	define( 'CHILD_THEME_URL', 'https://lyketil.com' );
 	define( 'CHILD_THEME_VERSION', '1.0.0' );
 
-	// Sets up the Theme.
-	require_once get_stylesheet_directory() . '/lib/theme-defaults.php';
-
 	// Adds helper functions.
 	require_once get_stylesheet_directory() . '/lib/helper-functions.php';
 
@@ -150,6 +147,7 @@ function ly_theme_setup() {
 	genesis_unregister_layout( 'content-sidebar-sidebar' );
 	genesis_unregister_layout( 'sidebar-content-sidebar' );
 	genesis_unregister_layout( 'sidebar-sidebar-content' );
+	genesis_unregister_layout( 'sidebar-content' );
 
 	// Removes output of primary navigation right extras
 	// appending either RSS links, search form, twitter link, or today's date
