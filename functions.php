@@ -94,7 +94,8 @@ function ly_theme_setup() {
 		)
 	);
 
-	// Adds support for accessibility.
+	// Adds full support for accessibility
+	// https://my.studiopress.com/documentation/snippets/accessibility/enable-accessibility-features/
 	add_theme_support(
 		'genesis-accessibility', array(
 			'404-page',
@@ -106,12 +107,15 @@ function ly_theme_setup() {
 		)
 	);
 
-	// Adds viewport meta tag for mobile browsers.
+	// Adds viewport meta tag for mobile browsers
+	// <meta name="viewport" content="width=device-width, initial-scale=1">
+	// https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag
 	add_theme_support(
 		'genesis-responsive-viewport'
 	);
 
-	// Adds custom logo in Customizer > Site Identity.
+	// Adds custom logo in Customizer > Site Identity
+	// https://developer.wordpress.org/themes/functionality/custom-logo/#adding-custom-logo-support-to-your-theme
 	add_theme_support(
 		'custom-logo', array(
 			'height'      => 120,
@@ -121,16 +125,17 @@ function ly_theme_setup() {
 		)
 	);
 
-	// Renames primary and secondary navigation menus.
+	// Adds primary and secondary navigation menus.
+	// Could add more here http://genesisdictionary.com/genesis-menus/
 	add_theme_support(
 		'genesis-menus', array(
-			'primary'   => __( 'Header Menu', 'genesis-starter' ),
-			'secondary' => __( 'Footer Menu', 'genesis-starter' ),
+			'primary'   => __( 'Header Menu', $theme_text_domain ),
+			'secondary' => __( 'Footer Menu', $theme_text_domain ),
 		)
 	);
 
 	// Adds support for after entry widget.
-	add_theme_support( 'genesis-after-entry-widget-area' );
+	// add_theme_support( 'genesis-after-entry-widget-area' );
 
 	// Adds support for 3-column footer widgets.
 	add_theme_support( 'genesis-footer-widgets', 3 );
@@ -141,17 +146,21 @@ function ly_theme_setup() {
 	// Removes secondary sidebar.
 	unregister_sidebar( 'sidebar-alt' );
 
-	// Removes site layouts.
+	// Removes site layouts that include secondary sidebar ('sidebar-alt')
 	genesis_unregister_layout( 'content-sidebar-sidebar' );
 	genesis_unregister_layout( 'sidebar-content-sidebar' );
 	genesis_unregister_layout( 'sidebar-sidebar-content' );
 
-	// Removes output of primary navigation right extras.
+	// Removes output of primary navigation right extras
+	// appending either RSS links, search form, twitter link, or today's date
 	remove_filter( 'genesis_nav_items', 'genesis_nav_right', 10, 2 );
 	remove_filter( 'wp_nav_menu_items', 'genesis_nav_right', 10, 2 );
 
+	// Hides or shows settings metaboxes in Admin > Genesis > Theme Settings
+	// Available in Customizer anyway
 	add_action( 'genesis_theme_settings_metaboxes', 'ly_remove_metaboxes' );
 
+	// Removes customizer features
 	add_filter( 'genesis_customizer_theme_settings_config', 'ly_remove_customizer_settings' );
 
 	// Displays custom logo.
@@ -165,10 +174,11 @@ function ly_theme_setup() {
 	remove_action( 'genesis_after_header', 'genesis_do_subnav' );
 	add_action( 'genesis_footer', 'genesis_do_subnav', 10 );
 
+	// Reduces secondary navigation menu to one level depth.
 	add_filter( 'wp_nav_menu_args', 'ly_secondary_menu_args' );
 
+	// Change config for Gravatar
 	add_filter( 'genesis_author_box_gravatar_size', 'ly_author_box_gravatar' );
-
 	add_filter( 'genesis_comment_list_args', 'ly_comments_gravatar' );
 
 }
@@ -245,17 +255,23 @@ function ly_responsive_menu_settings() {
  * @since 2.6.0 of Genesis Starter
  *
  * @param string $_genesis_admin_settings The admin screen to remove meta boxes from.
+ * @link https://craigsimpson.scot/code/remove-genesis-theme-settings-metaboxes
  */
 function ly_remove_metaboxes( $_genesis_admin_settings ) {
 
 	remove_meta_box( 'genesis-theme-settings-header', $_genesis_admin_settings, 'main' );
 	remove_meta_box( 'genesis-theme-settings-nav', $_genesis_admin_settings, 'main' );
+	remove_meta_box( 'genesis-theme-settings-adsense', $_genesis_admin_settings, 'main' );
+	remove_meta_box( 'genesis-theme-settings-breadcrumb', $_genesis_admin_settings, 'main' );
+	remove_meta_box( 'genesis-theme-settings-comments', $_genesis_admin_settings, 'main' );
+	remove_meta_box( 'genesis-theme-settings-posts', $_genesis_admin_settings, 'main' );
+	remove_meta_box( 'genesis-theme-settings-blogpage', $_genesis_admin_settings, 'main' );
 
 }
 
 
 /**
- * Removes output of header settings in the Customizer.
+ * Removes output of header settings in the Customizer
  *
  * @since 2.6.0 of Genesis Sample
  *
@@ -264,7 +280,9 @@ function ly_remove_metaboxes( $_genesis_admin_settings ) {
  */
 function ly_remove_customizer_settings( $config ) {
 
+	// Config to change between dynamic text or logo
 	unset( $config['genesis']['sections']['genesis_header'] );
+
 	return $config;
 
 }
