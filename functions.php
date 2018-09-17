@@ -47,9 +47,9 @@ require_once get_stylesheet_directory() . '/lib/woocommerce/woocommerce-output.p
 require_once get_stylesheet_directory() . '/lib/woocommerce/woocommerce-notice.php';
 
 // Defines the child theme (do not remove).
-define( 'CHILD_THEME_NAME', 'Genesis Sample' );
-define( 'CHILD_THEME_URL', 'https://www.studiopress.com/' );
-define( 'CHILD_THEME_VERSION', '2.6.0' );
+define( 'CHILD_THEME_NAME', 'Lyketil Genesis Starter' );
+define( 'CHILD_THEME_URL', 'https://lyketil.com' );
+define( 'CHILD_THEME_VERSION', '1.0.0' );
 
 add_action( 'wp_enqueue_scripts', 'ly_enqueue_scripts_styles' );
 /**
@@ -94,7 +94,7 @@ function ly_enqueue_scripts_styles() {
 /**
  * Defines responsive menu settings.
  *
- * @since 2.3.0
+ * @since 2.3.0 of Genesis Sample
  */
 function ly_responsive_menu_settings() {
 
@@ -191,7 +191,7 @@ add_action( 'genesis_theme_settings_metaboxes', 'ly_remove_metaboxes' );
 /**
  * Removes output of unused admin settings metaboxes.
  *
- * @since 2.6.0
+ * @since 2.6.0 of Genesis Starter
  *
  * @param string $_genesis_admin_settings The admin screen to remove meta boxes from.
  */
@@ -206,7 +206,7 @@ add_filter( 'genesis_customizer_theme_settings_config', 'ly_remove_customizer_se
 /**
  * Removes output of header settings in the Customizer.
  *
- * @since 2.6.0
+ * @since 2.6.0 of Genesis Sample
  *
  * @param array $config Original Customizer items.
  * @return array Filtered Customizer items.
@@ -233,7 +233,7 @@ add_filter( 'wp_nav_menu_args', 'ly_secondary_menu_args' );
 /**
  * Reduces secondary navigation menu to one level depth.
  *
- * @since 2.2.3
+ * @since 2.2.3 of Genesis Sample
  *
  * @param array $args Original menu options.
  * @return array Menu options with depth set to 1.
@@ -253,7 +253,7 @@ add_filter( 'genesis_author_box_gravatar_size', 'ly_author_box_gravatar' );
 /**
  * Modifies size of the Gravatar in the author box.
  *
- * @since 2.2.3
+ * @since 2.2.3 of Genesis Sample
  *
  * @param int $size Original icon size.
  * @return int Modified icon size.
@@ -268,7 +268,7 @@ add_filter( 'genesis_comment_list_args', 'ly_comments_gravatar' );
 /**
  * Modifies size of the Gravatar in the entry comments.
  *
- * @since 2.2.3
+ * @since 2.2.3 of Genesis Sample
  *
  * @param array $args Gravatar settings.
  * @return array Gravatar settings with modified size.
